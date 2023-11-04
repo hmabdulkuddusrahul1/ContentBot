@@ -35,8 +35,15 @@ async def get_msg(userbot, client, bot, sender, edit_id, msg_link, i):
     if 't.me/c/' in msg_link:
         if 't.me/b/' in msg_link:
             chat = str(msg_link.split("/")[-2])
+            print(f"A1\n{chat}")
         else:
             chat = int('-100' + str(msg_link.split("/")[-2]))
+            print(f"A2\n{chat}")
+    elif 'https://t.me/' in msg_link:
+        chatx = str(msg_link.split("/")[-2])
+        entity = await userbot.get_entity(chatx)
+        chat = f"{entity.id}"
+        print(f"{entity}\n{chat}")
         file = ""
         try:
             msg = await userbot.get_messages(chat, msg_id)
